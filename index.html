@@ -32,6 +32,31 @@
         pointer-events: none;
         z-index: 10;
       }
+
+      /* padrão: largura original */
+      .cut-top,
+      .cut-bottom {
+        left: 50%;
+        transform: translateX(-50%);
+        max-width: none;
+      }
+
+      /* telas menores que 768px → 200% */
+      @media (max-width: 767px) {
+        .cut-top,
+        .cut-bottom {
+          width: 250%;
+        }
+      }
+
+      /* telas médias (768px a 1023px) → 150% */
+      @media (min-width: 768px) and (max-width: 1023px) {
+        .cut-top,
+        .cut-bottom {
+          width: 150%;
+        }
+      }
+
       .float-between {
         position: relative;
         z-index: 30;
@@ -49,6 +74,27 @@
       .carousel-item {
         scroll-snap-align: center;
       }
+
+      .fade-in-element {
+        opacity: 0;
+        transform: translateY(20px);
+        transition: opacity 1.2s ease-out, transform 1.2s ease-out;
+      }
+
+      .fade-in-element.is-visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      /* Efeito de hover nos motivos */
+      #motivos img {
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+      }
+
+      #motivos img:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 12px 24px rgba(0, 0, 0, 0.25);
+      }
     </style>
   </head>
   <body class="lenis antialiased text-zinc-800">
@@ -56,49 +102,23 @@
     <main class="w-full overflow-hidden">
       <!-- ============ 1) HERO ============ -->
       <section id="hero" class="relative min-h-[80svh] grid text-white py-20">
-        <img
-          src="/img/hero.webp"
-          alt="Fundo da hero"
-          class="absolute inset-0 h-full w-full object-cover"
-        />
+        <picture>
+          <!-- Para telas menores que 640px -->
+          <source media="(max-width: 639px)" srcset="./img/hero-mobile.webp" />
+          <!-- Para telas maiores -->
+          <img
+            src="./img/hero.webp"
+            alt="Fundo da hero"
+            class="absolute inset-0 h-full w-full object-cover"
+          />
+        </picture>
         <div class="absolute inset-0"></div>
-
-        <!-- Conteúdo central -->
-        <div class="relative z-10 w-full">
-          <div class="container mx-auto max-w-6xl px-4">
-            <!-- Logo centralizada no topo -->
-            <div class="w-full flex justify-center">
-              <img
-                src="/img/logo.webp"
-                alt="Logo Jornada 1000"
-                class="h-12 sm:h-14 md:h-16 drop-shadow-[0_4px_16px_rgba(0,0,0,0.4)]"
-              />
-            </div>
-            <!-- Texto -->
-            <div class="mt-12 text-center max-w-3xl mx-auto">
-              <h1
-                class="mt-2 text-xl sm:text-2xl md:text-3xl text-white/70 uppercase"
-                style="text-shadow: 0 0 12px rgba(255, 0, 0, 0.8)"
-              >
-                Descubra como
-                <span
-                  class="font-bold text-white"
-                  style="text-shadow: 0 0 12px rgba(255, 0, 0, 0.8)"
-                >
-                  ganhar 1000 seguidores
-                </span>
-                por semana sem precisar postar todo dia ou virar refém do
-                algoritmo!
-              </h1>
-            </div>
-          </div>
-        </div>
       </section>
 
       <!-- Imagem pequena flutuante entre hero e section 2 -->
-      <div class="float-between flex justify-center">
+      <div class="float-between flex justify-center fade-in-element">
         <img
-          src="/img/icone-1k.webp"
+          src="./img/icone-1k.webp"
           alt="Ícone 1K"
           class="h-16 sm:h-20 md:h-24 drop-shadow-xl"
         />
@@ -107,7 +127,7 @@
       <!-- ============ 2) CASES ============ -->
       <section
         id="cases"
-        class="relative bg-white pt-20 sm:pt-24 md:pt-28 text-zinc-600"
+        class="relative bg-white pt-20 sm:pt-24 md:pt-28 pb-24 sm:pb-0 text-zinc-600"
       >
         <div class="container mx-auto max-w-6xl px-4">
           <!-- Título topo centralizado -->
@@ -118,24 +138,24 @@
             </h2>
           </header>
 
-          <div class="mb-8">
+          <div class="mb-8 fade-in-element">
             <div class="relative">
               <div
                 class="carousel-track flex gap-4 justify-center overflow-x-auto pb-4 px-1 snap-x"
               >
                 <!-- Itens -->
                 <img
-                  src="/img/case1.webp"
+                  src="./img/case1.webp"
                   alt="Case 1"
                   class="carousel-item h-64 md:h-80 w-auto rounded-xl shadow"
                 />
                 <img
-                  src="/img/case2.webp"
+                  src="./img/case2.webp"
                   alt="Case 2"
                   class="carousel-item h-64 md:h-80 w-auto rounded-xl shadow"
                 />
                 <img
-                  src="/img/case3.webp"
+                  src="./img/case3.webp"
                   alt="Case 3"
                   class="carousel-item h-64 md:h-80 w-auto rounded-xl shadow"
                 />
@@ -145,8 +165,8 @@
 
           <!-- Botão -->
           <a
-            href="#"
-            class="block mt-6 w-fit mx-auto bg-green-600 hover:bg-green-700 text-white text-lg font-semibold py-3 px-8 rounded-full transition duration-300"
+            href="https://pay.hotmart.com/S101372839T?bid=1755269589871"
+            class="block mt-6 w-fit mx-auto bg-green-600 hover:bg-green-700 text-white text-lg font-semibold py-3 px-8 rounded-full transition duration-300 fade-in-element"
           >
             Quero fazer parte!
           </a>
@@ -154,10 +174,10 @@
       </section>
 
       <!-- ============ 3) DORES ============ -->
-      <section id="dores" class="relative py-16 md:pt-80 md:pb-20">
+      <section id="dores" class="relative py-16 pt-32 md:pt-80 md:pb-20">
         <!-- Fundo -->
         <img
-          src="/img/section-bg.webp"
+          src="./img/section-bg.webp"
           alt="Fundo seção dores"
           class="absolute inset-0 h-full w-full object-cover"
         />
@@ -165,12 +185,12 @@
 
         <!-- Bordas recortadas (top/bottom) -->
         <img
-          src="/img/base-top-white.webp"
+          src="./img/base-top-white.webp"
           alt="Borda recortada top"
           class="cut-top"
         />
         <img
-          src="/img/base-bottom-white.webp"
+          src="./img/base-bottom-white.webp"
           alt="Borda recortada bottom"
           class="cut-bottom"
         />
@@ -192,7 +212,7 @@
             <!-- Imagem centralizada embaixo -->
             <div class="mt-10 flex justify-center">
               <img
-                src="/img/paidorec-1.png"
+                src="./img/paidorec-1.png"
                 alt="Dor principal"
                 class="max-w-full w-[800px] drop-shadow-2xl"
               />
@@ -202,7 +222,7 @@
       </section>
 
       <!-- ============ 4) MOTIVOS ============ -->
-      <section id="motivos" class="relative bg-white">
+      <section id="motivos" class="relative bg-white py-16 sm:py-0">
         <div class="container mx-auto max-w-6xl px-4">
           <header class="mb-6">
             <h2 class="text-2xl md:text-3xl text-center text-zinc-600">
@@ -216,34 +236,34 @@
           >
             <!-- 1..6 cards (apenas imagens) -->
             <img
-              src="/img/motivo1.webp"
+              src="./img/motivo1.webp"
               alt="Motivo 1"
-              class="w-full rounded-xl shadow"
+              class="w-full rounded-xl shadow fade-in-element"
             />
             <img
-              src="/img/motivo2.webp"
+              src="./img/motivo2.webp"
               alt="Motivo 2"
-              class="w-full rounded-xl shadow"
+              class="w-full rounded-xl shadow fade-in-element"
             />
             <img
-              src="/img/motivo3.webp"
+              src="./img/motivo3.webp"
               alt="Motivo 3"
-              class="w-full rounded-xl shadow"
+              class="w-full rounded-xl shadow fade-in-element"
             />
             <img
-              src="/img/motivo4.webp"
+              src="./img/motivo4.webp"
               alt="Motivo 4"
-              class="w-full rounded-xl shadow"
+              class="w-full rounded-xl shadow fade-in-element"
             />
             <img
-              src="/img/motivo5.webp"
+              src="./img/motivo5.webp"
               alt="Motivo 5"
-              class="w-full rounded-xl shadow"
+              class="w-full rounded-xl shadow fade-in-element"
             />
             <img
-              src="/img/motivo6.webp"
+              src="./img/motivo6.webp"
               alt="Motivo 6"
-              class="w-full rounded-xl shadow"
+              class="w-full rounded-xl shadow fade-in-element"
             />
           </div>
         </div>
@@ -252,38 +272,54 @@
       <!-- ============ 5) POR QUÊ ============ -->
       <section id="por-que" class="relative py-16 md:py-20 text-zinc-600">
         <!-- Fundo -->
-        <img
-          src="/img/section-5-bg.webp"
-          alt="Fundo seção por-que"
-          class="absolute inset-0 h-full w-full object-cover"
-        />
+        <picture>
+          <source
+            media="(max-width: 639px)"
+            srcset="./img/section-5-bg-mobile.webp"
+          />
+          <img
+            src="./img/section-5-bg.webp"
+            alt="Fundo seção por-que"
+            class="absolute inset-0 h-full w-full object-cover"
+          />
+        </picture>
         <div class="absolute inset-0"></div>
         <!-- Bordas recortadas -->
         <img
-          src="/img/base-top-white.webp"
+          src="./img/base-top-white.webp"
           alt="Borda recortada top"
           class="cut-top"
         />
         <img
-          src="/img/base-bottom-white.webp"
+          src="./img/base-bottom-white.webp"
           alt="Borda recortada bottom"
           class="cut-bottom"
         />
 
-        <div class="relative pt-80 pb-[28rem]">
+        <div
+          class="relative pt-20 sm:pt-80 [@media(min-width:768px)_and_(max-width:1023px)]:pt-40 pb-[28rem] text-left"
+        >
           <div class="container mx-auto max-w-6xl px-4">
-            <div class="max-w-xl">
-              <h2 class="text-2xl md:text-3xl tracking-wider font-normal">
+            <div
+              class="max-w-xl mx-auto sm:mx-0 [@media(min-width:768px)_and_(max-width:1023px)]:max-w-lg"
+            >
+              <h2
+                class="text-2xl md:text-3xl tracking-wider font-normal [@media(min-width:768px)_and_(max-width:1023px)]:text-[1.6rem]"
+              >
                 POR QUE NADA FUNCIONOU ANTES?
               </h2>
-              <p class="mt-4 text-lg md:text-xl leading-loose">
+              <p
+                class="mt-4 text-base sm:text-lg md:text-xl leading-loose [@media(min-width:768px)_and_(max-width:1023px)]:text-[1rem] [@media(min-width:768px)_and_(max-width:1023px)]:max-w-md"
+              >
                 É horrível se sentir assim, né?<br />
                 Você já tentou copiar perfis grandes, seguir fórmulas mágicas ou
                 até impulsionar posts, mas nada trouxe resultado real.<br />
                 A verdade é que falta um passo a passo que funcione para você,
                 com sua realidade e sua rotina.
               </p>
-              <p class="mt-3 text-lg md:text-xl font-bold">
+              <p
+                class="mt-3 text-base sm:text-lg md:text-xl font-bold [@media(min-width:768px)_and_(max-width:1023px)]:text-[1rem]"
+              >
                 É isso que a Jornada entrega.
               </p>
             </div>
@@ -292,7 +328,10 @@
       </section>
 
       <!-- ============ 6) PASSOS ============ -->
-      <section id="passos" class="relative bg-white text-zinc-600 pb-8">
+      <section
+        id="passos"
+        class="relative bg-white text-zinc-600 pt-16 sm:pt-0 pb-8"
+      >
         <div class="container mx-auto max-w-6xl px-4">
           <!-- Título topo centralizado -->
           <header class="text-center mb-8 max-w-xl mx-auto">
@@ -309,7 +348,7 @@
 
           <div class="mb-8">
             <img
-              src="/img/passos.webp"
+              src="./img/passos.webp"
               alt="Passos para a transformação"
               class="h-auto w-full"
             />
@@ -318,7 +357,10 @@
       </section>
 
       <!-- ============ 7) CONTEÚDO DO CURSO ============ -->
-      <section id="conteudo" class="relative bg-white text-zinc-600">
+      <section
+        id="conteudo"
+        class="relative bg-white text-zinc-600 pb-24 sm:pb-0"
+      >
         <div class="container mx-auto max-w-6xl px-4">
           <!-- Título topo centralizado -->
           <header class="text-center mb-12 max-w-xl mx-auto">
@@ -332,7 +374,7 @@
 
           <div>
             <img
-              src="/img/capas.webp"
+              src="./img/capas.webp"
               alt="Conteúdo e módulos do curso Jornada 1000 seguidores"
               class="h-auto w-full"
             />
@@ -341,10 +383,10 @@
       </section>
 
       <!-- ============ 8) É PARA VOCÊ? ============ -->
-      <section id="e-para-voce" class="relative py-16 md:pt-80 md:pb-80">
+      <section id="e-para-voce" class="relative py-32 md:pt-80 md:pb-80">
         <!-- Fundo -->
         <img
-          src="/img/section-bg.webp"
+          src="./img/section-bg.webp"
           alt="Fundo seção É para você?"
           class="absolute inset-0 h-full w-full object-cover"
         />
@@ -352,12 +394,12 @@
 
         <!-- Bordas recortadas -->
         <img
-          src="/img/base-top-white.webp"
+          src="./img/base-top-white.webp"
           alt="Borda recortada top"
           class="cut-top"
         />
         <img
-          src="/img/base-bottom-white.webp"
+          src="./img/base-bottom-white.webp"
           alt="Borda recortada bottom"
           class="cut-bottom"
         />
@@ -377,7 +419,7 @@
                 <ul class="space-y-4">
                   <li class="flex items-start gap-3">
                     <img
-                      src="/img/checked-pink.webp"
+                      src="./img/checked-pink.webp"
                       alt="Check"
                       class="w-6 h-6 mt-1"
                     />
@@ -385,7 +427,7 @@
                   </li>
                   <li class="flex items-start gap-3">
                     <img
-                      src="/img/checked-pink.webp"
+                      src="./img/checked-pink.webp"
                       alt="Check"
                       class="w-6 h-6 mt-1"
                     />
@@ -393,7 +435,7 @@
                   </li>
                   <li class="flex items-start gap-3">
                     <img
-                      src="/img/checked-pink.webp"
+                      src="./img/checked-pink.webp"
                       alt="Check"
                       class="w-6 h-6 mt-1"
                     />
@@ -401,7 +443,7 @@
                   </li>
                   <li class="flex items-start gap-3">
                     <img
-                      src="/img/checked-pink.webp"
+                      src="./img/checked-pink.webp"
                       alt="Check"
                       class="w-6 h-6 mt-1"
                     />
@@ -410,7 +452,7 @@
                   </li>
                   <li class="flex items-start gap-3">
                     <img
-                      src="/img/checked-pink.webp"
+                      src="./img/checked-pink.webp"
                       alt="Check"
                       class="w-6 h-6 mt-1"
                     />
@@ -418,7 +460,7 @@
                   </li>
                   <li class="flex items-start gap-3">
                     <img
-                      src="/img/checked-pink.webp"
+                      src="./img/checked-pink.webp"
                       alt="Check"
                       class="w-6 h-6 mt-1"
                     />
@@ -434,7 +476,7 @@
               <!-- Imagem -->
               <div class="flex-1 flex justify-center">
                 <img
-                  src="/img/paidorec-2.webp"
+                  src="./img/paidorec-2.webp"
                   alt="Foto"
                   class="max-w-sm md:max-w-md"
                 />
@@ -445,7 +487,10 @@
       </section>
 
       <!-- ============ 9) VALOR ============ -->
-      <section id="valor" class="relative bg-white text-zinc-600 pb-8">
+      <section
+        id="valor"
+        class="relative bg-white text-zinc-600 pb-8 pt-16 sm:pt-0"
+      >
         <div class="container mx-auto max-w-6xl px-4">
           <!-- Título topo centralizado -->
           <header class="text-center mb-8 max-w-xl mx-auto">
@@ -459,7 +504,7 @@
             <div class="flex items-center justify-between">
               <div class="flex items-center gap-3">
                 <img
-                  src="/img/checked-green.webp"
+                  src="./img/checked-green.webp"
                   alt="Check"
                   class="w-6 h-6"
                 />
@@ -471,7 +516,7 @@
             <div class="flex items-center justify-between">
               <div class="flex items-center gap-3">
                 <img
-                  src="/img/checked-green.webp"
+                  src="./img/checked-green.webp"
                   alt="Check"
                   class="w-6 h-6"
                 />
@@ -483,7 +528,7 @@
             <div class="flex items-center justify-between">
               <div class="flex items-center gap-3">
                 <img
-                  src="/img/checked-green.webp"
+                  src="./img/checked-green.webp"
                   alt="Check"
                   class="w-6 h-6"
                 />
@@ -495,7 +540,7 @@
             <div class="flex items-center justify-between">
               <div class="flex items-center gap-3">
                 <img
-                  src="/img/checked-green.webp"
+                  src="./img/checked-green.webp"
                   alt="Check"
                   class="w-6 h-6"
                 />
@@ -507,7 +552,7 @@
             <div class="flex items-center justify-between">
               <div class="flex items-center gap-3">
                 <img
-                  src="/img/checked-green.webp"
+                  src="./img/checked-green.webp"
                   alt="Check"
                   class="w-6 h-6"
                 />
@@ -531,7 +576,7 @@
       <section id="oferta" class="relative py-16 md:py-20">
         <!-- Fundo -->
         <img
-          src="/img/section-bg.webp"
+          src="./img/section-bg.webp"
           alt="Fundo seção oferta"
           class="absolute inset-0 h-full w-full object-cover"
         />
@@ -544,7 +589,7 @@
             >
               <!-- Imagem -->
               <div class="flex-1 flex justify-center">
-                <img src="/img/paidorec-3.webp" alt="Oferta" class="max-w-md" />
+                <img src="./img/paidorec-3.webp" alt="Oferta" class="w-full" />
               </div>
 
               <!-- Texto e preço -->
@@ -566,7 +611,7 @@
 
                 <!-- Botão -->
                 <a
-                  href="#"
+                  href="https://pay.hotmart.com/S101372839T?bid=1755269589871"
                   class="inline-block mt-6 bg-green-600 hover:bg-green-700 text-white text-lg font-semibold py-3 px-8 rounded-full transition duration-300"
                 >
                   Sim, eu quero a Jornada!
@@ -581,7 +626,7 @@
       <section id="escolhas" class="relative py-16 md:py-24">
         <!-- Fundo -->
         <img
-          src="/img/section-11-bg.webp"
+          src="./img/section-11-bg.webp"
           alt="Fundo seção escolhas"
           class="absolute inset-0 h-full w-full object-cover"
         />
@@ -591,12 +636,13 @@
           <div class="container mx-auto max-w-6xl px-4">
             <header class="text-center max-w-3xl mx-auto">
               <h2
-                class="text-white text-2xl md:text-3xl font-extrabold drop-shadow"
+                class="text-white text-xl sm:text-2xl md:text-3xl font-extrabold drop-shadow"
               >
                 Agora você tem<br />duas escolhas:
               </h2>
+
               <p
-                class="mt-12 text-xl md:text-2xl leading-loose text-white/90 max-w-lg mx-auto"
+                class="mt-12 text-base sm:text-lg md:text-2xl leading-loose text-white/90 max-w-lg mx-auto"
               >
                 01. Continuar postando sem rumo e vendo os mesmos resultados
                 fracos.<br /><br />
@@ -611,26 +657,34 @@
       <!-- ============ 12) QUEM É PAIDOREC ============ -->
       <section id="paidorec" class="relative py-16 md:py-20">
         <!-- Fundo -->
-        <img
-          src="/img/section-12-bg.webp"
-          alt="Fundo seção paidorec"
-          class="absolute inset-0 h-full w-full object-cover"
-        />
+        <picture>
+          <source
+            media="(max-width: 639px)"
+            srcset="./img/section-12-bg-mobile.webp"
+          />
+          <img
+            src="./img/section-12-bg.webp"
+            alt="Fundo seção paidorec"
+            class="absolute inset-0 h-full w-full object-cover"
+          />
+        </picture>
         <div class="absolute inset-0"></div>
 
         <div class="relative">
           <div class="container mx-auto max-w-6xl px-4">
-            <div class="max-w-md text-xl md:text-2xl leading-loose mt-64 mb-64">
+            <div
+              class="max-w-md text-lg sm:text-xl md:text-2xl leading-loose mt-0 sm:mt-64 mb-80 sm:mb-64"
+            >
               <h2
-                class="text-white text-2xl md:text-3xl font-extrabold drop-shadow"
+                class="text-white text-xl sm:text-2xl md:text-3xl font-extrabold drop-shadow"
               >
                 Eu sou paidorec, criador da Jornada 1000 Seguidores por Semana
               </h2>
-              <p class="mt-8 text-white/90">
+              <p class="mt-8 text-white/90 text-base sm:text-lg md:text-xl">
                 Já ajudei milhares de pessoas a crescerem seus perfis com método
                 validado, mesmo começando do zero.
               </p>
-              <p class="mt-8 text-white/90">
+              <p class="mt-8 text-white/90 text-base sm:text-lg md:text-xl">
                 Agora eu quero ajudar você a ter resultados na internet e ganhar
                 mais dinheiro no processo.
               </p>
@@ -643,10 +697,12 @@
       <section id="cta" class="relative bg-white text-zinc-600 py-14">
         <div class="container mx-auto max-w-6xl px-4">
           <div class="text-center max-w-2xl mx-auto">
-            <p class="text-lg md:text-xl leading-loose">
+            <p class="text-base sm:text-lg md:text-xl leading-loose">
               Acesso imediato e vitalício por R$67
             </p>
-            <p class="text-lg md:text-xl leading-loose font-bold text-red-600">
+            <p
+              class="text-base sm:text-lg md:text-xl leading-loose font-bold text-red-600"
+            >
               Clique agora em "Sim, eu quero!" e comece hoje mesmo.
             </p>
           </div>
@@ -657,7 +713,7 @@
       <section id="oferta-2" class="relative py-16 md:py-20">
         <!-- Fundo -->
         <img
-          src="/img/section-bg.webp"
+          src="./img/section-bg.webp"
           alt="Fundo seção oferta-2"
           class="absolute inset-0 h-full w-full object-cover"
         />
@@ -670,7 +726,7 @@
             >
               <!-- Imagem -->
               <div class="flex-1 flex justify-center">
-                <img src="/img/mocks.webp" alt="Oferta" class="w-full" />
+                <img src="./img/mocks.webp" alt="Oferta" class="w-full" />
               </div>
 
               <!-- Texto e preço -->
@@ -691,7 +747,7 @@
 
                 <!-- Botão -->
                 <a
-                  href="#"
+                  href="https://pay.hotmart.com/S101372839T?bid=1755269589871"
                   class="inline-block mt-6 bg-green-600 hover:bg-green-700 text-white text-lg font-semibold py-3 px-8 rounded-full transition duration-300"
                 >
                   Sim, eu quero a Jornada!
@@ -711,7 +767,7 @@
               <div
                 class="flex-1 flex flex-col items-center md:items-start gap-2"
               >
-                <img src="/img/logo.webp" alt="Logo" class="w-48 md:w-64" />
+                <img src="./img/logo.webp" alt="Logo" class="w-48 md:w-64" />
                 <p class="text-zinc-700 text-sm mt-2 ml-4 text-center">
                   Copyright © 2025<br />Todos os Direitos Reservados.
                 </p>
@@ -853,21 +909,23 @@
       </section>
 
       <footer>
-        <div class="text-center p-2">
-          <span
-            >Este site não é afiliado ao Facebook ou a qualquer empresa do
-            grupo. Após sair do Facebook, toda a responsabilidade é nossa. A
-            compra deste material não garante resultados, embora apresentemos
-            provas reais e depoimentos de alunos.</span
-          >
+        <div class="text-center p-2 text-xs sm:text-sm">
+          <span>
+            Este site não é afiliado ao Facebook ou a qualquer empresa do grupo.
+            Após sair do Facebook, toda a responsabilidade é nossa. A compra
+            deste material não garante resultados, embora apresentemos provas
+            reais e depoimentos de alunos.
+          </span>
         </div>
-        <div class="bg-zinc-700 text-zinc-200 p-2 text-center">
-          <span
-            >Desenvolvido por
-            <a href="https://felipepassos.dev" class="text-white"
-              >Felipe Passos (SimplifyWeb)</a
-            ></span
-          >
+        <div
+          class="bg-zinc-700 text-zinc-200 p-2 text-center text-xs sm:text-sm"
+        >
+          <span>
+            Desenvolvido por
+            <a href="https://felipepassos.dev" class="text-white">
+              Felipe Passos (SimplifyWeb)
+            </a>
+          </span>
         </div>
       </footer>
     </main>
@@ -891,6 +949,26 @@
         }
 
         requestAnimationFrame(raf);
+      });
+    </script>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const elements = document.querySelectorAll(".fade-in-element");
+
+        const observer = new IntersectionObserver(
+          (entries, obs) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                entry.target.classList.add("is-visible");
+                obs.unobserve(entry.target); // anima só 1 vez
+              }
+            });
+          },
+          { threshold: 0.1 }
+        );
+
+        elements.forEach((el) => observer.observe(el));
       });
     </script>
   </body>
