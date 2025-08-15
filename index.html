@@ -1,0 +1,897 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Jornada 1000 Seguidores por Semana</title>
+    <meta
+      name="description"
+      content="Landing page da Jornada 1000 (paidorec.com/jornada) — esqueleto inicial"
+    />
+    <!-- Tailwind CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap");
+      body {
+        font-family: "Montserrat", sans-serif;
+      }
+      /* Utilitários para camadas flutuantes e recortes */
+      .cut-top {
+        position: absolute;
+        inset-inline: 0;
+        top: 0;
+        width: 100%;
+        pointer-events: none;
+        z-index: 10;
+      }
+      .cut-bottom {
+        position: absolute;
+        inset-inline: 0;
+        bottom: 0;
+        width: 100%;
+        pointer-events: none;
+        z-index: 10;
+      }
+      .float-between {
+        position: relative;
+        z-index: 30;
+        margin-top: -2.5rem;
+      }
+      @media (min-width: 768px) {
+        .float-between {
+          margin-top: -3.5rem;
+        }
+      }
+      /* Carrossel simples via scroll */
+      .carousel-track {
+        scroll-snap-type: x mandatory;
+      }
+      .carousel-item {
+        scroll-snap-align: center;
+      }
+    </style>
+  </head>
+  <body class="lenis antialiased text-zinc-800">
+    <!-- WRAPPER -->
+    <main class="w-full overflow-hidden">
+      <!-- ============ 1) HERO ============ -->
+      <section id="hero" class="relative min-h-[80svh] grid text-white py-20">
+        <img
+          src="/img/hero.webp"
+          alt="Fundo da hero"
+          class="absolute inset-0 h-full w-full object-cover"
+        />
+        <div class="absolute inset-0"></div>
+
+        <!-- Conteúdo central -->
+        <div class="relative z-10 w-full">
+          <div class="container mx-auto max-w-6xl px-4">
+            <!-- Logo centralizada no topo -->
+            <div class="w-full flex justify-center">
+              <img
+                src="/img/logo.webp"
+                alt="Logo Jornada 1000"
+                class="h-12 sm:h-14 md:h-16 drop-shadow-[0_4px_16px_rgba(0,0,0,0.4)]"
+              />
+            </div>
+            <!-- Texto -->
+            <div class="mt-12 text-center max-w-3xl mx-auto">
+              <h1
+                class="mt-2 text-xl sm:text-2xl md:text-3xl text-white/70 uppercase"
+                style="text-shadow: 0 0 12px rgba(255, 0, 0, 0.8)"
+              >
+                Descubra como
+                <span
+                  class="font-bold text-white"
+                  style="text-shadow: 0 0 12px rgba(255, 0, 0, 0.8)"
+                >
+                  ganhar 1000 seguidores
+                </span>
+                por semana sem precisar postar todo dia ou virar refém do
+                algoritmo!
+              </h1>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Imagem pequena flutuante entre hero e section 2 -->
+      <div class="float-between flex justify-center">
+        <img
+          src="/img/icone-1k.webp"
+          alt="Ícone 1K"
+          class="h-16 sm:h-20 md:h-24 drop-shadow-xl"
+        />
+      </div>
+
+      <!-- ============ 2) CASES ============ -->
+      <section
+        id="cases"
+        class="relative bg-white pt-20 sm:pt-24 md:pt-28 text-zinc-600"
+      >
+        <div class="container mx-auto max-w-6xl px-4">
+          <!-- Título topo centralizado -->
+          <header class="text-center mb-8">
+            <h2 class="text-xl sm:text-2xl md:text-3xl max-w-3xl mx-auto">
+              Veja o crescimento de alunos que saíram do zero e fizeram a
+              <span class="font-bold">Jornada 1000 por semana!</span>
+            </h2>
+          </header>
+
+          <div class="mb-8">
+            <div class="relative">
+              <div
+                class="carousel-track flex gap-4 justify-center overflow-x-auto pb-4 px-1 snap-x"
+              >
+                <!-- Itens -->
+                <img
+                  src="/img/case1.webp"
+                  alt="Case 1"
+                  class="carousel-item h-64 md:h-80 w-auto rounded-xl shadow"
+                />
+                <img
+                  src="/img/case2.webp"
+                  alt="Case 2"
+                  class="carousel-item h-64 md:h-80 w-auto rounded-xl shadow"
+                />
+                <img
+                  src="/img/case3.webp"
+                  alt="Case 3"
+                  class="carousel-item h-64 md:h-80 w-auto rounded-xl shadow"
+                />
+              </div>
+            </div>
+          </div>
+
+          <!-- Botão -->
+          <a
+            href="#"
+            class="block mt-6 w-fit mx-auto bg-green-600 hover:bg-green-700 text-white text-lg font-semibold py-3 px-8 rounded-full transition duration-300"
+          >
+            Quero fazer parte!
+          </a>
+        </div>
+      </section>
+
+      <!-- ============ 3) DORES ============ -->
+      <section id="dores" class="relative py-16 md:pt-80 md:pb-20">
+        <!-- Fundo -->
+        <img
+          src="/img/section-bg.webp"
+          alt="Fundo seção dores"
+          class="absolute inset-0 h-full w-full object-cover"
+        />
+        <div class="absolute inset-0"></div>
+
+        <!-- Bordas recortadas (top/bottom) -->
+        <img
+          src="/img/base-top-white.webp"
+          alt="Borda recortada top"
+          class="cut-top"
+        />
+        <img
+          src="/img/base-bottom-white.webp"
+          alt="Borda recortada bottom"
+          class="cut-bottom"
+        />
+
+        <div class="relative">
+          <div class="container mx-auto max-w-6xl px-4">
+            <header class="text-center max-w-3xl mx-auto">
+              <h2
+                class="text-white text-2xl md:text-3xl font-extrabold drop-shadow"
+              >
+                Você tem conteúdo pra passar, mas está cansado de resultados
+                medianos no Instagram?
+              </h2>
+              <p class="mt-3 text-white/90">
+                Parece que você está preso no ciclo dos criadores sem resultado.
+              </p>
+            </header>
+
+            <!-- Imagem centralizada embaixo -->
+            <div class="mt-10 flex justify-center">
+              <img
+                src="/img/paidorec-1.png"
+                alt="Dor principal"
+                class="max-w-full w-[800px] drop-shadow-2xl"
+              />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ 4) MOTIVOS ============ -->
+      <section id="motivos" class="relative bg-white">
+        <div class="container mx-auto max-w-6xl px-4">
+          <header class="mb-6">
+            <h2 class="text-2xl md:text-3xl text-center text-zinc-600">
+              Isso acontece por <span class="font-bold">6 motivos</span>:
+            </h2>
+          </header>
+
+          <!-- GRID (2 rows x 3 cards em telas grandes) -->
+          <div
+            class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6"
+          >
+            <!-- 1..6 cards (apenas imagens) -->
+            <img
+              src="/img/motivo1.webp"
+              alt="Motivo 1"
+              class="w-full rounded-xl shadow"
+            />
+            <img
+              src="/img/motivo2.webp"
+              alt="Motivo 2"
+              class="w-full rounded-xl shadow"
+            />
+            <img
+              src="/img/motivo3.webp"
+              alt="Motivo 3"
+              class="w-full rounded-xl shadow"
+            />
+            <img
+              src="/img/motivo4.webp"
+              alt="Motivo 4"
+              class="w-full rounded-xl shadow"
+            />
+            <img
+              src="/img/motivo5.webp"
+              alt="Motivo 5"
+              class="w-full rounded-xl shadow"
+            />
+            <img
+              src="/img/motivo6.webp"
+              alt="Motivo 6"
+              class="w-full rounded-xl shadow"
+            />
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ 5) POR QUÊ ============ -->
+      <section id="por-que" class="relative py-16 md:py-20 text-zinc-600">
+        <!-- Fundo -->
+        <img
+          src="/img/section-5-bg.webp"
+          alt="Fundo seção por-que"
+          class="absolute inset-0 h-full w-full object-cover"
+        />
+        <div class="absolute inset-0"></div>
+        <!-- Bordas recortadas -->
+        <img
+          src="/img/base-top-white.webp"
+          alt="Borda recortada top"
+          class="cut-top"
+        />
+        <img
+          src="/img/base-bottom-white.webp"
+          alt="Borda recortada bottom"
+          class="cut-bottom"
+        />
+
+        <div class="relative pt-80 pb-[28rem]">
+          <div class="container mx-auto max-w-6xl px-4">
+            <div class="max-w-xl">
+              <h2 class="text-2xl md:text-3xl tracking-wider font-normal">
+                POR QUE NADA FUNCIONOU ANTES?
+              </h2>
+              <p class="mt-4 text-lg md:text-xl leading-loose">
+                É horrível se sentir assim, né?<br />
+                Você já tentou copiar perfis grandes, seguir fórmulas mágicas ou
+                até impulsionar posts, mas nada trouxe resultado real.<br />
+                A verdade é que falta um passo a passo que funcione para você,
+                com sua realidade e sua rotina.
+              </p>
+              <p class="mt-3 text-lg md:text-xl font-bold">
+                É isso que a Jornada entrega.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ 6) PASSOS ============ -->
+      <section id="passos" class="relative bg-white text-zinc-600 pb-8">
+        <div class="container mx-auto max-w-6xl px-4">
+          <!-- Título topo centralizado -->
+          <header class="text-center mb-8 max-w-xl mx-auto">
+            <h2
+              class="text-lg sm:text-xl md:text-2xl max-w-3xl mx-auto font-bold uppercase"
+            >
+              Passos da transformação
+            </h2>
+            <p class="mt-4 text-lg md:text-xl leading-loose">
+              É por isso que você precisa viver a Jornada 1000 seguidores por
+              semana. E aqui estão os 3 passos para fazer isso acontecer:
+            </p>
+          </header>
+
+          <div class="mb-8">
+            <img
+              src="/img/passos.webp"
+              alt="Passos para a transformação"
+              class="h-auto w-full"
+            />
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ 7) CONTEÚDO DO CURSO ============ -->
+      <section id="conteudo" class="relative bg-white text-zinc-600">
+        <div class="container mx-auto max-w-6xl px-4">
+          <!-- Título topo centralizado -->
+          <header class="text-center mb-12 max-w-xl mx-auto">
+            <h2
+              class="text-lg sm:text-xl md:text-2xl max-w-3xl mx-auto font-bold text-red-700"
+            >
+              Veja tudo que você vai receber na jornada 1000 seguidores por
+              semana
+            </h2>
+          </header>
+
+          <div>
+            <img
+              src="/img/capas.webp"
+              alt="Conteúdo e módulos do curso Jornada 1000 seguidores"
+              class="h-auto w-full"
+            />
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ 8) É PARA VOCÊ? ============ -->
+      <section id="e-para-voce" class="relative py-16 md:pt-80 md:pb-80">
+        <!-- Fundo -->
+        <img
+          src="/img/section-bg.webp"
+          alt="Fundo seção É para você?"
+          class="absolute inset-0 h-full w-full object-cover"
+        />
+        <div class="absolute inset-0"></div>
+
+        <!-- Bordas recortadas -->
+        <img
+          src="/img/base-top-white.webp"
+          alt="Borda recortada top"
+          class="cut-top"
+        />
+        <img
+          src="/img/base-bottom-white.webp"
+          alt="Borda recortada bottom"
+          class="cut-bottom"
+        />
+
+        <div class="relative">
+          <div class="container mx-auto max-w-6xl px-4">
+            <div class="flex flex-col md:flex-row items-center gap-8">
+              <!-- Lista -->
+              <div
+                class="flex-1 max-w-2xl text-white text-lg md:text-xl leading-relaxed"
+              >
+                <h2
+                  class="text-2xl md:text-3xl font-extrabold drop-shadow mb-6"
+                >
+                  A Jornada 1000 seguidores por semana é para você que:
+                </h2>
+                <ul class="space-y-4">
+                  <li class="flex items-start gap-3">
+                    <img
+                      src="/img/checked-pink.webp"
+                      alt="Check"
+                      class="w-6 h-6 mt-1"
+                    />
+                    Quer crescer seu perfil, mas não sabe por onde;
+                  </li>
+                  <li class="flex items-start gap-3">
+                    <img
+                      src="/img/checked-pink.webp"
+                      alt="Check"
+                      class="w-6 h-6 mt-1"
+                    />
+                    Sente “vergonha” quando ninguém curte ou comenta seu vídeo;
+                  </li>
+                  <li class="flex items-start gap-3">
+                    <img
+                      src="/img/checked-pink.webp"
+                      alt="Check"
+                      class="w-6 h-6 mt-1"
+                    />
+                    Perde a paciência ao criar conteúdo;
+                  </li>
+                  <li class="flex items-start gap-3">
+                    <img
+                      src="/img/checked-pink.webp"
+                      alt="Check"
+                      class="w-6 h-6 mt-1"
+                    />
+                    Queima dinheiro com post patrocinado só para aumentar as
+                    visualizações, mas sem estratégia;
+                  </li>
+                  <li class="flex items-start gap-3">
+                    <img
+                      src="/img/checked-pink.webp"
+                      alt="Check"
+                      class="w-6 h-6 mt-1"
+                    />
+                    Quer clientes entrando em contato pelo direct diariamente;
+                  </li>
+                  <li class="flex items-start gap-3">
+                    <img
+                      src="/img/checked-pink.webp"
+                      alt="Check"
+                      class="w-6 h-6 mt-1"
+                    />
+                    Tem um produto ou serviço e quer escalar seu faturamento.
+                  </li>
+                </ul>
+                <p class="mt-6 text-base md:text-lg">
+                  Se você se enxerga em pelo menos
+                  <strong>2 dos itens acima</strong>, a Jornada é pra você.
+                </p>
+              </div>
+
+              <!-- Imagem -->
+              <div class="flex-1 flex justify-center">
+                <img
+                  src="/img/paidorec-2.webp"
+                  alt="Foto"
+                  class="max-w-sm md:max-w-md"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ 9) VALOR ============ -->
+      <section id="valor" class="relative bg-white text-zinc-600 pb-8">
+        <div class="container mx-auto max-w-6xl px-4">
+          <!-- Título topo centralizado -->
+          <header class="text-center mb-8 max-w-xl mx-auto">
+            <p class="text-lg md:text-xl leading-loose">
+              Recapitulando o que você vai receber na Jornada 1000 Seguidores
+              por Semana:
+            </p>
+          </header>
+
+          <div class="mb-8 space-y-4 max-w-2xl mx-auto text-lg md:text-xl">
+            <div class="flex items-center justify-between">
+              <div class="flex items-center gap-3">
+                <img
+                  src="/img/checked-green.webp"
+                  alt="Check"
+                  class="w-6 h-6"
+                />
+                <span>Checklist Viral</span>
+              </div>
+              <span class="text-red-500 italic line-through">R$ 197,00</span>
+            </div>
+
+            <div class="flex items-center justify-between">
+              <div class="flex items-center gap-3">
+                <img
+                  src="/img/checked-green.webp"
+                  alt="Check"
+                  class="w-6 h-6"
+                />
+                <span>Calculadora de engajamento</span>
+              </div>
+              <span class="text-red-500 italic line-through">R$ 47,00</span>
+            </div>
+
+            <div class="flex items-center justify-between">
+              <div class="flex items-center gap-3">
+                <img
+                  src="/img/checked-green.webp"
+                  alt="Check"
+                  class="w-6 h-6"
+                />
+                <span>Mini aula de tráfego pago no botão impulsionar</span>
+              </div>
+              <span class="text-red-500 italic line-through">R$ 247,00</span>
+            </div>
+
+            <div class="flex items-center justify-between">
+              <div class="flex items-center gap-3">
+                <img
+                  src="/img/checked-green.webp"
+                  alt="Check"
+                  class="w-6 h-6"
+                />
+                <span>100 ideias de vídeo virais</span>
+              </div>
+              <span class="text-red-500 italic line-through">R$ 147,00</span>
+            </div>
+
+            <div class="flex items-center justify-between">
+              <div class="flex items-center gap-3">
+                <img
+                  src="/img/checked-green.webp"
+                  alt="Check"
+                  class="w-6 h-6"
+                />
+                <span>10 ganchos mais usados da internet</span>
+              </div>
+              <span class="text-red-500 italic line-through">R$ 97,00</span>
+            </div>
+          </div>
+
+          <div class="text-center mb-8 max-w-xl mx-auto">
+            <p class="mt-4 text-lg md:text-xl leading-loose">
+              O valor real desse pacote é de
+              <span class="text-red-500 font-extrabold">R$ 735,00</span>. Mas
+              hoje você garante sua entrada nessa jornada por apenas:
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ 10) OFERTA ============ -->
+      <section id="oferta" class="relative py-16 md:py-20">
+        <!-- Fundo -->
+        <img
+          src="/img/section-bg.webp"
+          alt="Fundo seção oferta"
+          class="absolute inset-0 h-full w-full object-cover"
+        />
+        <div class="absolute inset-0"></div>
+
+        <div class="relative">
+          <div class="container mx-auto max-w-6xl px-4">
+            <div
+              class="flex flex-col md:flex-row items-center justify-center gap-10"
+            >
+              <!-- Imagem -->
+              <div class="flex-1 flex justify-center">
+                <img src="/img/paidorec-3.webp" alt="Oferta" class="max-w-md" />
+              </div>
+
+              <!-- Texto e preço -->
+              <div class="flex-1 text-center md:text-left">
+                <h2
+                  class="text-xl md:text-3xl text-red-500 italic line-through"
+                >
+                  Total Real: R$ 735,00
+                </h2>
+                <h2
+                  class="text-white text-3xl md:text-4xl font-bold drop-shadow"
+                >
+                  Valor HOJE: R$ 67,00
+                </h2>
+                <p class="mt-3 text-white/90 text-lg">
+                  Acesso vitalício<br />
+                  Garantia incondicional de 7 dias
+                </p>
+
+                <!-- Botão -->
+                <a
+                  href="#"
+                  class="inline-block mt-6 bg-green-600 hover:bg-green-700 text-white text-lg font-semibold py-3 px-8 rounded-full transition duration-300"
+                >
+                  Sim, eu quero a Jornada!
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ 11) ESCOLHAS ============ -->
+      <section id="escolhas" class="relative py-16 md:py-24">
+        <!-- Fundo -->
+        <img
+          src="/img/section-11-bg.webp"
+          alt="Fundo seção escolhas"
+          class="absolute inset-0 h-full w-full object-cover"
+        />
+        <div class="absolute inset-0"></div>
+
+        <div class="relative">
+          <div class="container mx-auto max-w-6xl px-4">
+            <header class="text-center max-w-3xl mx-auto">
+              <h2
+                class="text-white text-2xl md:text-3xl font-extrabold drop-shadow"
+              >
+                Agora você tem<br />duas escolhas:
+              </h2>
+              <p
+                class="mt-12 text-xl md:text-2xl leading-loose text-white/90 max-w-lg mx-auto"
+              >
+                01. Continuar postando sem rumo e vendo os mesmos resultados
+                fracos.<br /><br />
+                02. Ou <span class="text-red-700">entrar para a Jornada</span> e
+                ver seu perfil crescer com estratégia e leveza.
+              </p>
+            </header>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ 12) QUEM É PAIDOREC ============ -->
+      <section id="paidorec" class="relative py-16 md:py-20">
+        <!-- Fundo -->
+        <img
+          src="/img/section-12-bg.webp"
+          alt="Fundo seção paidorec"
+          class="absolute inset-0 h-full w-full object-cover"
+        />
+        <div class="absolute inset-0"></div>
+
+        <div class="relative">
+          <div class="container mx-auto max-w-6xl px-4">
+            <div class="max-w-md text-xl md:text-2xl leading-loose mt-64 mb-64">
+              <h2
+                class="text-white text-2xl md:text-3xl font-extrabold drop-shadow"
+              >
+                Eu sou paidorec, criador da Jornada 1000 Seguidores por Semana
+              </h2>
+              <p class="mt-8 text-white/90">
+                Já ajudei milhares de pessoas a crescerem seus perfis com método
+                validado, mesmo começando do zero.
+              </p>
+              <p class="mt-8 text-white/90">
+                Agora eu quero ajudar você a ter resultados na internet e ganhar
+                mais dinheiro no processo.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ 13) CTA ============ -->
+      <section id="cta" class="relative bg-white text-zinc-600 py-14">
+        <div class="container mx-auto max-w-6xl px-4">
+          <div class="text-center max-w-2xl mx-auto">
+            <p class="text-lg md:text-xl leading-loose">
+              Acesso imediato e vitalício por R$67
+            </p>
+            <p class="text-lg md:text-xl leading-loose font-bold text-red-600">
+              Clique agora em "Sim, eu quero!" e comece hoje mesmo.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ 14) OFERTA 2 ============ -->
+      <section id="oferta-2" class="relative py-16 md:py-20">
+        <!-- Fundo -->
+        <img
+          src="/img/section-bg.webp"
+          alt="Fundo seção oferta-2"
+          class="absolute inset-0 h-full w-full object-cover"
+        />
+        <div class="absolute inset-0"></div>
+
+        <div class="relative">
+          <div class="container mx-auto max-w-6xl px-4">
+            <div
+              class="flex flex-col md:flex-row items-center justify-center gap-10"
+            >
+              <!-- Imagem -->
+              <div class="flex-1 flex justify-center">
+                <img src="/img/mocks.webp" alt="Oferta" class="w-full" />
+              </div>
+
+              <!-- Texto e preço -->
+              <div class="flex-1 text-center">
+                <p class="mt-3 text-white/90 text-lg">
+                  Comece agora a<br />
+                  Jornada 1000 Seguidores por Semana
+                </p>
+                <h2
+                  class="mt-3 text-white text-3xl md:text-4xl font-bold drop-shadow"
+                >
+                  Valor HOJE: R$ 67,00
+                </h2>
+                <p class="mt-3 text-white/90 text-lg">
+                  Acesso vitalício<br />
+                  Garantia incondicional de 7 dias
+                </p>
+
+                <!-- Botão -->
+                <a
+                  href="#"
+                  class="inline-block mt-6 bg-green-600 hover:bg-green-700 text-white text-lg font-semibold py-3 px-8 rounded-full transition duration-300"
+                >
+                  Sim, eu quero a Jornada!
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ 15) FAQ ============ -->
+      <section id="faq" class="relative py-16 md:py-20 bg-[#d1d1d1]">
+        <div class="relative">
+          <div class="container mx-auto max-w-6xl px-4">
+            <div class="flex flex-col md:flex-row justify-center gap-10">
+              <!-- Coluna esquerda (logo + direitos) -->
+              <div
+                class="flex-1 flex flex-col items-center md:items-start gap-2"
+              >
+                <img src="/img/logo.webp" alt="Logo" class="w-48 md:w-64" />
+                <p class="text-zinc-700 text-sm mt-2 ml-4 text-center">
+                  Copyright © 2025<br />Todos os Direitos Reservados.
+                </p>
+              </div>
+
+              <!-- Coluna direita (FAQ) -->
+              <!-- Coluna direita (FAQ) -->
+              <div class="md:w-2/3 w-full">
+                <h3
+                  class="text-zinc-600 text-xl md:text-2xl font-semibold mb-4"
+                >
+                  FAQ
+                </h3>
+
+                <div id="faq-accordion" class="space-y-4">
+                  <!-- Item 1 -->
+                  <details class="faq-item group">
+                    <summary
+                      class="flex items-center justify-between gap-4 cursor-pointer px-4 py-3 rounded-md border border-zinc-400 bg-transparent transition-colors group-open:border-rose-400 group-open:text-rose-600"
+                    >
+                      <span class="font-medium">Como vou acessar?</span>
+                      <svg
+                        class="w-5 h-5 transition-transform duration-200 group-open:rotate-180"
+                        viewBox="0 0 20 20"
+                        fill="currentColor"
+                      >
+                        <path
+                          fill-rule="evenodd"
+                          d="M5.23 7.21a.75.75 0 011.06.02L10 10.17l3.71-2.94a.75.75 0 11.94 1.16l-4.24 3.36a.75.75 0 01-.94 0L5.21 8.39a.75.75 0 01.02-1.18z"
+                          clip-rule="evenodd"
+                        />
+                      </svg>
+                    </summary>
+                    <div class="mt-2 pl-4 text-zinc-700">
+                      Assim que o pagamento for confirmado, você recebe no
+                      e-mail seu acesso à área de membros com login e senha.
+                    </div>
+                  </details>
+
+                  <!-- Item 2 -->
+                  <details class="faq-item group">
+                    <summary
+                      class="flex items-center justify-between gap-4 cursor-pointer px-4 py-3 rounded-md border border-zinc-400 bg-transparent transition-colors group-open:border-rose-400 group-open:text-rose-600"
+                    >
+                      <span class="font-medium">Quanto tempo de acesso?</span>
+                      <svg
+                        class="w-5 h-5 transition-transform duration-200 group-open:rotate-180"
+                        viewBox="0 0 20 20"
+                        fill="currentColor"
+                      >
+                        <path
+                          fill-rule="evenodd"
+                          d="M5.23 7.21a.75.75 0 011.06.02L10 10.17l3.71-2.94a.75.75 0 11.94 1.16l-4.24 3.36a.75.75 0 01-.94 0L5.21 8.39a.75.75 0 01.02-1.18z"
+                          clip-rule="evenodd"
+                        />
+                      </svg>
+                    </summary>
+                    <div class="mt-2 pl-4 text-zinc-700">
+                      Acesso vitalício ao conteúdo e a todas as futuras
+                      atualizações da Jornada.
+                    </div>
+                  </details>
+
+                  <!-- Item 3 -->
+                  <details class="faq-item group">
+                    <summary
+                      class="flex items-center justify-between gap-4 cursor-pointer px-4 py-3 rounded-md border border-zinc-400 bg-transparent transition-colors group-open:border-rose-400 group-open:text-rose-600"
+                    >
+                      <span class="font-medium"
+                        >Funciona mesmo sem nunca criar conteúdo?</span
+                      >
+                      <svg
+                        class="w-5 h-5 transition-transform duration-200 group-open:rotate-180"
+                        viewBox="0 0 20 20"
+                        fill="currentColor"
+                      >
+                        <path
+                          fill-rule="evenodd"
+                          d="M5.23 7.21a.75.75 0 011.06.02L10 10.17l3.71-2.94a.75.75 0 11.94 1.16l-4.24 3.36a.75.75 0 01-.94 0L5.21 8.39a.75.75 0 01.02-1.18z"
+                          clip-rule="evenodd"
+                        />
+                      </svg>
+                    </summary>
+                    <div class="mt-2 pl-4 text-zinc-700">
+                      Sim. O método mostra passo a passo desde a base (ideias,
+                      roteiro e publicação) até estratégias para acelerar
+                      resultados.
+                    </div>
+                  </details>
+
+                  <!-- Item 4 (pode começar aberto, mas sem vermelho fixo) -->
+                  <details open class="faq-item group">
+                    <summary
+                      class="flex items-center justify-between gap-4 cursor-pointer px-4 py-3 rounded-md border border-zinc-400 bg-transparent transition-colors group-open:border-rose-400 group-open:text-rose-600"
+                    >
+                      <span class="font-medium">Tem garantia?</span>
+                      <svg
+                        class="w-5 h-5 transition-transform duration-200 group-open:rotate-180"
+                        viewBox="0 0 20 20"
+                        fill="currentColor"
+                      >
+                        <path
+                          fill-rule="evenodd"
+                          d="M5.23 7.21a.75.75 0 011.06.02L10 10.17l3.71-2.94a.75.75 0 11.94 1.16l-4.24 3.36a.75.75 0 01-.94 0L5.21 8.39a.75.75 0 01.02-1.18z"
+                          clip-rule="evenodd"
+                        />
+                      </svg>
+                    </summary>
+                    <div class="mt-2 pl-4 text-zinc-700">
+                      A compra desse material não garante nenhum tipo de
+                      resultado. Fazemos todos os esforços para indicar
+                      claramente e mostrar todas as provas do produto e usamos
+                      resultados reais de alunos.
+                    </div>
+                  </details>
+                </div>
+              </div>
+
+              <!-- Acordeão: só um aberto por vez -->
+              <script>
+                document.addEventListener("DOMContentLoaded", function () {
+                  const items = document.querySelectorAll(
+                    "#faq-accordion .faq-item"
+                  );
+                  items.forEach((item) => {
+                    item.addEventListener("toggle", function () {
+                      if (this.open) {
+                        items.forEach((other) => {
+                          if (other !== this) other.removeAttribute("open");
+                        });
+                      }
+                    });
+                  });
+                });
+              </script>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <footer>
+        <div class="text-center p-2">
+          <span
+            >Este site não é afiliado ao Facebook ou a qualquer empresa do
+            grupo. Após sair do Facebook, toda a responsabilidade é nossa. A
+            compra deste material não garante resultados, embora apresentemos
+            provas reais e depoimentos de alunos.</span
+          >
+        </div>
+        <div class="bg-zinc-700 text-zinc-200 p-2 text-center">
+          <span
+            >Desenvolvido por
+            <a href="https://felipepassos.dev" class="text-white"
+              >Felipe Passos (SimplifyWeb)</a
+            ></span
+          >
+        </div>
+      </footer>
+    </main>
+
+    <script src="https://unpkg.com/lenis@1.2.3/dist/lenis.min.js"></script>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const lenis = new Lenis({
+          duration: 1.5,
+          smooth: true,
+          direction: "vertical",
+          gestureOrientation: "vertical",
+          smoothTouch: true,
+          touchMultiplier: 1.5,
+        });
+
+        function raf(time) {
+          lenis.raf(time);
+          requestAnimationFrame(raf);
+        }
+
+        requestAnimationFrame(raf);
+      });
+    </script>
+  </body>
+</html>
