@@ -165,6 +165,7 @@
 
           <!-- Botão -->
           <a
+            id="pay1"
             href="https://pay.hotmart.com/S101372839T?bid=1755269589871"
             class="block mt-6 w-fit mx-auto bg-green-600 hover:bg-green-700 text-white text-lg font-semibold py-3 px-8 rounded-full transition duration-300 fade-in-element"
           >
@@ -611,6 +612,7 @@
 
                 <!-- Botão -->
                 <a
+                  id="pay2"
                   href="https://pay.hotmart.com/S101372839T?bid=1755269589871"
                   class="inline-block mt-6 bg-green-600 hover:bg-green-700 text-white text-lg font-semibold py-3 px-8 rounded-full transition duration-300"
                 >
@@ -747,6 +749,7 @@
 
                 <!-- Botão -->
                 <a
+                  id="pay3"
                   href="https://pay.hotmart.com/S101372839T?bid=1755269589871"
                   class="inline-block mt-6 bg-green-600 hover:bg-green-700 text-white text-lg font-semibold py-3 px-8 rounded-full transition duration-300"
                 >
@@ -971,5 +974,102 @@
         elements.forEach((el) => observer.observe(el));
       });
     </script>
+
+    <!-- Meta Pixel -->
+    <script>
+      !(function (f, b, e, v, n, t, s) {
+        if (f.fbq) return;
+        n = f.fbq = function () {
+          n.callMethod
+            ? n.callMethod.apply(n, arguments)
+            : n.queue.push(arguments);
+        };
+        if (!f._fbq) f._fbq = n;
+        n.push = n;
+        n.loaded = !0;
+        n.version = "2.0";
+        n.queue = [];
+        t = b.createElement(e);
+        t.async = !0;
+        t.src = v;
+        s = b.getElementsByTagName(e)[0];
+        s.parentNode.insertBefore(t, s);
+      })(
+        window,
+        document,
+        "script",
+        "https://connect.facebook.net/en_US/fbevents.js"
+      );
+
+      const FB_PIXEL_ID = "1329665138673602";
+      const CAPI_ENDPOINT = "/capi.php"; // ajuste o caminho se necessário
+
+      fbq("init", FB_PIXEL_ID);
+
+      // helpers
+      const getCookie = (name) =>
+        ("; " + document.cookie)
+          .split("; " + name + "=")
+          .pop()
+          .split(";")[0] || undefined;
+      const genEventId = (p) =>
+        `${p}-${Date.now()}-${Math.random().toString(36).slice(2)}`;
+      const sendCapi = (payload) => {
+        const body = JSON.stringify(payload);
+        if (navigator.sendBeacon) {
+          navigator.sendBeacon(
+            CAPI_ENDPOINT,
+            new Blob([body], { type: "application/json" })
+          );
+        } else {
+          fetch(CAPI_ENDPOINT, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            keepalive: true,
+            body,
+          });
+        }
+      };
+
+      // PageView (Pixel + CAPI com o mesmo event_id)
+      (function () {
+        const eventId = genEventId("pv");
+        fbq("track", "PageView", {}, { eventID: eventId });
+        sendCapi({
+          event_name: "PageView",
+          event_id: eventId,
+          event_source_url: location.href,
+          fbp: getCookie("_fbp"),
+          fbc: getCookie("_fbc"),
+          user_agent: navigator.userAgent,
+        });
+      })();
+
+      // Clique nos 3 links específicos (pay1, pay2, pay3)
+      document.addEventListener("click", (e) => {
+        const a = e.target.closest("a#pay1, a#pay2, a#pay3");
+        if (!a) return;
+
+        const eventId = genEventId("ic");
+        fbq("track", "InitiateCheckout", {}, { eventID: eventId });
+        sendCapi({
+          event_name: "InitiateCheckout",
+          event_id: eventId,
+          event_source_url: location.href,
+          fbp: getCookie("_fbp"),
+          fbc: getCookie("_fbc"),
+          user_agent: navigator.userAgent,
+        });
+        // não bloqueia a navegação
+      });
+    </script>
+    <noscript>
+      <img
+        height="1"
+        width="1"
+        style="display: none"
+        src="https://www.facebook.com/tr?id=1329665138673602&ev=PageView&noscript=1"
+      />
+    </noscript>
   </body>
 </html>
