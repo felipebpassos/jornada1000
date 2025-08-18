@@ -10,8 +10,13 @@
     />
     <!-- Tailwind CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <meta name="color-scheme" content="light" />
+    <meta name="supported-color-schemes" content="light" />
     <style>
       @import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap");
+      :root {
+        color-scheme: light;
+      }
       body {
         font-family: "Montserrat", sans-serif;
       }
@@ -130,7 +135,6 @@
         class="relative bg-white pt-20 sm:pt-24 md:pt-28 pb-24 sm:pb-0 text-zinc-600"
       >
         <div class="container mx-auto max-w-6xl px-4">
-          <!-- Título topo centralizado -->
           <header class="text-center mb-8">
             <h2 class="text-xl sm:text-2xl md:text-3xl max-w-3xl mx-auto">
               Veja o crescimento de alunos que saíram do zero e fizeram a
@@ -139,31 +143,88 @@
           </header>
 
           <div class="mb-8 fade-in-element">
-            <div class="relative">
-              <div
-                class="carousel-track flex gap-4 justify-center overflow-x-auto pb-4 px-1 snap-x"
+            <div class="relative overflow-hidden sm:overflow-visible">
+              <!-- Setas (sem fundo), só no mobile -->
+              <button
+                id="cases-prev"
+                class="sm:hidden absolute left-2 top-1/2 -translate-y-1/2 z-10 p-2 disabled:text-[#d1d1d1] text-[#ff6b57]"
+                aria-label="Anterior"
+                type="button"
               >
-                <!-- Itens -->
-                <img
-                  src="./img/case1.webp"
-                  alt="Case 1"
-                  class="carousel-item h-64 md:h-80 w-auto rounded-xl shadow"
-                />
-                <img
-                  src="./img/case2.webp"
-                  alt="Case 2"
-                  class="carousel-item h-64 md:h-80 w-auto rounded-xl shadow"
-                />
-                <img
-                  src="./img/case3.webp"
-                  alt="Case 3"
-                  class="carousel-item h-64 md:h-80 w-auto rounded-xl shadow"
-                />
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="w-7 h-7"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M15 19l-7-7 7-7"
+                  />
+                </svg>
+              </button>
+
+              <div
+                id="cases-track"
+                class="flex gap-0 sm:gap-4 scroll-smooth overflow-x-auto sm:overflow-visible snap-x snap-mandatory sm:snap-none px-0 sm:px-1 pb-4"
+              >
+                <!-- 1 card por “página” no mobile -->
+                <div
+                  class="carousel-item min-w-full sm:min-w-0 sm:w-auto shrink-0 grid place-items-center snap-center"
+                >
+                  <img
+                    src="./img/case1.webp"
+                    alt="Case 1"
+                    class="h-64 md:h-80 w-auto rounded-xl shadow"
+                  />
+                </div>
+                <div
+                  class="carousel-item min-w-full sm:min-w-0 sm:w-auto shrink-0 grid place-items-center snap-center"
+                >
+                  <img
+                    src="./img/case2.webp"
+                    alt="Case 2"
+                    class="h-64 md:h-80 w-auto rounded-xl shadow"
+                  />
+                </div>
+                <div
+                  class="carousel-item min-w-full sm:min-w-0 sm:w-auto shrink-0 grid place-items-center snap-center"
+                >
+                  <img
+                    src="./img/case3.webp"
+                    alt="Case 3"
+                    class="h-64 md:h-80 w-auto rounded-xl shadow"
+                  />
+                </div>
               </div>
+
+              <button
+                id="cases-next"
+                class="sm:hidden absolute right-2 top-1/2 -translate-y-1/2 z-10 p-2 disabled:text-[#d1d1d1] text-[#ff6b57]"
+                aria-label="Próximo"
+                type="button"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="w-7 h-7"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M9 5l7 7-7 7"
+                  />
+                </svg>
+              </button>
             </div>
           </div>
 
-          <!-- Botão -->
           <a
             id="pay1"
             href="https://pay.hotmart.com/S101372839T?bid=1755269589871"
@@ -173,6 +234,36 @@
           </a>
         </div>
       </section>
+
+      <script>
+        (function () {
+          const track = document.getElementById("cases-track");
+          const prevBtn = document.getElementById("cases-prev");
+          const nextBtn = document.getElementById("cases-next");
+          if (!track || !prevBtn || !nextBtn) return;
+
+          function updateButtons() {
+            const page = Math.round(track.scrollLeft / track.clientWidth);
+            const totalPages = track.children.length;
+            prevBtn.disabled = page <= 0;
+            nextBtn.disabled = page >= totalPages - 1;
+          }
+
+          function slideBy(dir = 1) {
+            const amount = track.clientWidth;
+            track.scrollBy({ left: dir * amount, behavior: "smooth" });
+            setTimeout(updateButtons, 300); // espera scroll
+          }
+
+          prevBtn.addEventListener("click", () => slideBy(-1));
+          nextBtn.addEventListener("click", () => slideBy(1));
+          track.addEventListener("scroll", updateButtons);
+          window.addEventListener("resize", updateButtons);
+
+          // inicial
+          updateButtons();
+        })();
+      </script>
 
       <!-- ============ 3) DORES ============ -->
       <section id="dores" class="relative py-16 pt-32 md:pt-80 md:pb-20">
@@ -488,6 +579,7 @@
       </section>
 
       <!-- ============ 9) VALOR ============ -->
+      <!-- ============ 9) VALOR ============ -->
       <section
         id="valor"
         class="relative bg-white text-zinc-600 pb-8 pt-16 sm:pt-0"
@@ -495,76 +587,107 @@
         <div class="container mx-auto max-w-6xl px-4">
           <!-- Título topo centralizado -->
           <header class="text-center mb-8 max-w-xl mx-auto">
-            <p class="text-lg md:text-xl leading-loose">
+            <p
+              class="text-base sm:text-lg md:text-xl leading-relaxed sm:leading-loose"
+            >
               Recapitulando o que você vai receber na Jornada 1000 Seguidores
               por Semana:
             </p>
           </header>
 
-          <div class="mb-8 space-y-4 max-w-2xl mx-auto text-lg md:text-xl">
-            <div class="flex items-center justify-between">
-              <div class="flex items-center gap-3">
+          <div
+            class="mb-8 space-y-4 max-w-2xl mx-auto text-sm sm:text-base md:text-lg"
+          >
+            <!-- Item -->
+            <div class="flex items-center justify-between gap-2">
+              <div
+                class="flex items-center gap-2 sm:gap-3 min-w-[200px] max-w-[70%]"
+              >
                 <img
                   src="./img/checked-green.webp"
                   alt="Check"
-                  class="w-6 h-6"
+                  class="w-5 h-5 sm:w-6 sm:h-6"
                 />
                 <span>Checklist Viral</span>
               </div>
-              <span class="text-red-500 italic line-through">R$ 197,00</span>
+              <span class="text-red-500 italic line-through whitespace-nowrap"
+                >R$ 197,00</span
+              >
             </div>
 
-            <div class="flex items-center justify-between">
-              <div class="flex items-center gap-3">
+            <!-- Item -->
+            <div class="flex items-center justify-between gap-2">
+              <div
+                class="flex items-center gap-2 sm:gap-3 min-w-[200px] max-w-[70%]"
+              >
                 <img
                   src="./img/checked-green.webp"
                   alt="Check"
-                  class="w-6 h-6"
+                  class="w-5 h-5 sm:w-6 sm:h-6"
                 />
                 <span>Calculadora de engajamento</span>
               </div>
-              <span class="text-red-500 italic line-through">R$ 47,00</span>
+              <span class="text-red-500 italic line-through whitespace-nowrap"
+                >R$ 47,00</span
+              >
             </div>
 
-            <div class="flex items-center justify-between">
-              <div class="flex items-center gap-3">
+            <!-- Item -->
+            <div class="flex items-center justify-between gap-2">
+              <div
+                class="flex items-center gap-2 sm:gap-3 min-w-[200px] max-w-[70%]"
+              >
                 <img
                   src="./img/checked-green.webp"
                   alt="Check"
-                  class="w-6 h-6"
+                  class="w-5 h-5 sm:w-6 sm:h-6"
                 />
                 <span>Mini aula de tráfego pago no botão impulsionar</span>
               </div>
-              <span class="text-red-500 italic line-through">R$ 247,00</span>
+              <span class="text-red-500 italic line-through whitespace-nowrap"
+                >R$ 247,00</span
+              >
             </div>
 
-            <div class="flex items-center justify-between">
-              <div class="flex items-center gap-3">
+            <!-- Item -->
+            <div class="flex items-center justify-between gap-2">
+              <div
+                class="flex items-center gap-2 sm:gap-3 min-w-[200px] max-w-[70%]"
+              >
                 <img
                   src="./img/checked-green.webp"
                   alt="Check"
-                  class="w-6 h-6"
+                  class="w-5 h-5 sm:w-6 sm:h-6"
                 />
                 <span>100 ideias de vídeo virais</span>
               </div>
-              <span class="text-red-500 italic line-through">R$ 147,00</span>
+              <span class="text-red-500 italic line-through whitespace-nowrap"
+                >R$ 147,00</span
+              >
             </div>
 
-            <div class="flex items-center justify-between">
-              <div class="flex items-center gap-3">
+            <!-- Item -->
+            <div class="flex items-center justify-between gap-2">
+              <div
+                class="flex items-center gap-2 sm:gap-3 min-w-[200px] max-w-[70%]"
+              >
                 <img
                   src="./img/checked-green.webp"
                   alt="Check"
-                  class="w-6 h-6"
+                  class="w-5 h-5 sm:w-6 sm:h-6"
                 />
                 <span>10 ganchos mais usados da internet</span>
               </div>
-              <span class="text-red-500 italic line-through">R$ 97,00</span>
+              <span class="text-red-500 italic line-through whitespace-nowrap"
+                >R$ 97,00</span
+              >
             </div>
           </div>
 
           <div class="text-center mb-8 max-w-xl mx-auto">
-            <p class="mt-4 text-lg md:text-xl leading-loose">
+            <p
+              class="mt-4 text-base sm:text-lg md:text-xl leading-relaxed sm:leading-loose"
+            >
               O valor real desse pacote é de
               <span class="text-red-500 font-extrabold">R$ 735,00</span>. Mas
               hoje você garante sua entrada nessa jornada por apenas:
