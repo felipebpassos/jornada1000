@@ -1,0 +1,46 @@
+# =========================
+# Photoshop
+# =========================
+
+# Arquivos principais (se quiser ignorar tudo)
+*.psd
+*.psb
+
+# Arquivos temporários/cache
+*.tmp
+*.temp
+~*.psd
+*.psd~
+
+# Arquivos de recovery
+*.autosave
+*.autorecover
+
+# =========================
+# GIMP
+# =========================
+
+# Arquivos principais
+*.xcf
+
+# Backups automáticos
+*.xcf~
+*.xcf.bak
+
+# =========================
+# Gerais (imagens editáveis/exportações intermediárias)
+# =========================
+
+# Arquivos de trabalho/exportação temporária
+*.png~
+*.jpg~
+*.jpeg~
+*.tiff~
+*.webp~
+
+# =========================
+# Sistema / lixo comum
+# =========================
+
+.DS_Store
+Thumbs.db
