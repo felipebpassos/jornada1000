@@ -227,6 +227,24 @@
                     class="h-64 md:h-80 w-auto rounded-xl shadow"
                   />
                 </div>
+                <div
+                  class="carousel-item min-w-full sm:min-w-[33.3333%] shrink-0 snap-start grid place-items-center"
+                >
+                  <img
+                    src="./img/case6.webp"
+                    alt="Case 6"
+                    class="h-64 md:h-80 w-auto rounded-xl shadow"
+                  />
+                </div>
+                <div
+                  class="carousel-item min-w-full sm:min-w-[33.3333%] shrink-0 snap-start grid place-items-center"
+                >
+                  <img
+                    src="./img/case7.webp"
+                    alt="Case 7"
+                    class="h-64 md:h-80 w-auto rounded-xl shadow"
+                  />
+                </div>
               </div>
 
               <button
@@ -262,28 +280,56 @@
           const nextBtn = document.getElementById("cases-next");
           if (!track || !prevBtn || !nextBtn) return;
 
-          // calcula o total de "páginas" reais baseado em largura visível
-          function getTotalPages() {
-            return Math.max(
-              1,
-              Math.ceil(track.scrollWidth / track.clientWidth)
+          // calcula as posições reais de navegação, incluindo o fim do trilho
+          function getPagePositions() {
+            const maxScrollLeft = Math.max(
+              0,
+              track.scrollWidth - track.clientWidth
             );
+            const positions = [0];
+
+            for (
+              let left = track.clientWidth;
+              left < maxScrollLeft;
+              left += track.clientWidth
+            ) {
+              positions.push(left);
+            }
+
+            if (maxScrollLeft > 0) positions.push(maxScrollLeft);
+
+            return positions;
           }
 
           function getCurrentPage() {
-            return Math.round(track.scrollLeft / track.clientWidth);
+            const positions = getPagePositions();
+
+            return positions.reduce((closestIndex, position, index) => {
+              const closestDistance = Math.abs(
+                track.scrollLeft - positions[closestIndex]
+              );
+              const distance = Math.abs(track.scrollLeft - position);
+
+              return distance < closestDistance ? index : closestIndex;
+            }, 0);
           }
 
           function updateButtons() {
             const page = getCurrentPage();
-            const total = getTotalPages();
+            const total = getPagePositions().length;
             prevBtn.disabled = page <= 0;
             nextBtn.disabled = page >= total - 1;
           }
 
           function slideBy(dir = 1) {
-            const amount = track.clientWidth; // rola exatamente uma "página"
-            track.scrollBy({ left: dir * amount, behavior: "smooth" });
+            const positions = getPagePositions();
+            const page = getCurrentPage();
+            const nextPage = Math.min(
+              Math.max(page + dir, 0),
+              positions.length - 1
+            );
+
+            track.scrollTo({ left: positions[nextPage], behavior: "smooth" });
             // dá um tempo pro scroll terminar antes de avaliar
             setTimeout(updateButtons, 350);
           }
